@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Activity Launcher - APKs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .floating-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="h-full bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white flex items-center justify-center p-4">
+
+    <!-- Main Card Container -->
+    <div class="max-w-md w-full bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl text-center relative overflow-hidden">
+        
+        <!-- Decorative Glow Background Accent -->
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- App Icon / Illustration -->
+        <div class="relative z-10 mb-5 flex justify-center">
+            <div class="w-20 h-20 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/30 floating-icon">
+                <i class="fa-solid fa-rocket text-3xl text-white"></i>
+            </div>
+        </div>
+
+        <!-- App Title & Description -->
+        <div class="relative z-10 mb-6">
+            <h1 class="text-2xl font-bold tracking-tight mb-2">VEDTV</h1>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+                Click below to download the latest version directly from your GitHub repository.
+            </p>
+        </div>
+
+        <!-- Version Badge -->
+        <div class="relative z-10 inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700/50 px-3 py-1 rounded-full text-xs text-slate-300 mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Latest Release</span>
+        </div>
+
+        <!-- Download Buttons List -->
+        <div class="relative z-10 space-y-3">
+            <!-- APK: VEDTV.apk -->
+            <a href="https://raw.githubusercontent.com/ItsVedantt/vedtv/main/VEDTV.apk" 
+               class="download-btn w-full inline-flex items-center justify-between bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-indigo-500/50 text-white font-medium py-3 px-4 rounded-2xl shadow transition-all duration-300 group">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-box-archive"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm font-semibold">VEDTV.apk</div>
+                        <div class="text-xs text-slate-400">Direct GitHub Download</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-download text-slate-400 group-hover:text-white transition-transform group-hover:-translate-y-0.5"></i>
+            </a>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="relative z-10 mt-6 text-xs text-slate-500">
+            <p>Compatible with Android devices. Direct download from GitHub.</p>
+        </div>
+
+    </div>
+
+    <!-- Notification Custom Modal -->
+    <div id="toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 z-50 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span class="text-sm font-medium" id="toastMessage">Download started successfully!</span>
+    </div>
+
+    <script>
+        // Intercept download clicks to show a gorgeous custom non-blocking notification toast
+        const downloadBtns = document.querySelectorAll('.download-btn');
+        const toast = document.getElementById('toast');
+
+        downloadBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 4000);
+            });
+        });
+    </script>
+</body>
+</html>
